@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>LOG WATCHER</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io.connect('http://127.0.0.1:5000');
+
+	socket.on('connect', function() {
+	});
+
+	socket.on('display log', function(data) {
+        var i;
+        for (i = 0; i < data.data.length; i++) {
+            $("#messages").append('<li>'+data.data[i]+'</li>');
+        }
+	});
+
+    socket.on('file updated', function(data) {
+        var i;
+        for (i = 0; i < data.data.length; i++) {
+            $("#messages").append('<li>'+data.data[i]+'</li>');
+        }
+    });
+
+</script>
+<h2>LOGS</h2>
+<h3><ul id="messages"></ul></h3>
+</body>
+</html>
